@@ -33,6 +33,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+
+        <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIkakaRWAAPMWOiTYkHJM4DDRUCeXYPts&libraries=places&callback=initMap">
+</script>
         <!-- CSS -->
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
 
@@ -72,19 +76,210 @@
                                 <div class="col-lg-10 col-xl-8">
                                     <div class="single-post">
                                       
-                                    
-                                        <h1 class="cushycms" style="margin-top: 20px; margin-bottom: 20px;">Contact Us </h1>
 
-                                        <form action="https://formspree.io/f/xjvzdena"
-                                        method="POST">
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6"><label class="text-dark" for="inputName">Full name</label><input class="form-control py-4" id="inputName" type="text" placeholder="Full name" name="Name" /></div>
-                                                <div class="form-group col-md-6"><label class="text-dark" for="inputEmail">Email</label><input class="form-control py-4" id="inputEmail" type="email" placeholder="name@example.com" name="Email" /></div>
-												    <div class="form-group col-md-12"><label class="text-dark" for="inputEmail">Telephone</label><input class="form-control py-4" id="inputPhone" type="tel" placeholder="Enter phone number" name="Phone" /></div>
+                                
+                                        
+                                        <!-- Write a paragraph about the booking method -->
+                                        <div class="cushycms">
+                                            <div class="booking options">
+                                                <h2>Book an airtightness test</h2>
+                                                <!-- Add icon to show safe form -->
+                                                
+                                                <p>There are two ways to book your airtightness test:</p>
+                                                <ul class="booking-options list-unstyled">
+                                                    <li><i class="fas fa-check"></i> <strong>Online:</strong> You can book your airtightness test online by clicking the button below.</li>
+                                                    <li><i class="fas fa-check"></i> <strong>Phone:</strong> You can book your airtightness test by calling us on <a href="tel:07833 491313">07833 491313</a>.</li>
+
+
+                                                </ul>
                                             </div>
-                                            <div class="form-group"><label class="text-dark" for="inputMessage">Message</label><textarea class="form-control py-3" id="inputMessage" type="text" name="Description" placeholder="Enter your message..." rows="4"></textarea></div>
-                                            <div class="text-center"><button class="btn btn-primary mt-4" type="submit">Get a free quote</button></div>
-                                        </form>           
+                                            <!-- Here is what you can expect from us -->
+                                            <!-- <div class="expect">
+                                                <h2>What to expect from us</h2>
+                                                <p>When you book your air tightness test with us, you can expect:</p>
+                                                <ul class="expect-options list-unstyled">
+                                                    <li><i class="fas fa-check"></i> <strong>Professionalism:</strong> We are a professional company that will provide you with a professional service.</li>
+                                                    <li><i class="fas fa-check"></i> <strong>Reliability:</strong> We will arrive on time and complete the air tightness test on time.</li>
+                                                    <li><i class="fas fa-check"></i> <strong>Competitive prices:</strong> We will provide you with a competitive price for your air tightness test.</li>
+                                                    <li><i class="fas fa-check"></i> <strong>Quality:</strong> We will provide you with a quality air tightness test.</li>
+                                                    <li><i class="fas fa-check"></i> <strong>Customer service:</strong> We will provide you with excellent customer service.</li>
+                                                </ul>
+                                            </div> -->
+                                            
+
+
+                                        <div id="showingFirstStep" class="formContainer cushycms border rounded p-4 mt-4 shadow bg-white">
+                                            <form id="addEnquiry" action="https://formspree.io/f/xjvzdena"
+                                            method="POST">
+                                                <div class="form-row" id="firstStep">
+                                                
+                                                    <!-- Show a step counter -->
+                                                    <div class="row">
+                                                        
+                                                    <div class="form-group col-md-6"><label class="text-dark font-bold cushycms" for="inputName" style="font-weight: 600">Name</label><input class="form-control" id="inputName" type="text" name="name" placeholder="Enter your name" required></div>
+                                                    <div class="form-group col-md-6"><label class="text-dark font-bold cushycms" for="inputEmail" style="font-weight: 600">Email</label><input class="form-control py-4 rounded" id="inputEmail" type="email" aria-describedby="emailHelp" placeholder="Enter email address" name="email" required></div>
+                                                    
+                                                        <div class="form-group col-md-12"><label class="text-dark" for="inputEmail" style="font-weight: 600">Telephone</label><input class="form-control py-4 rounded" id="inputNumber" type="tel" aria-describedby="emailHelp" placeholder="Enter telephone number" name="telephone" required></div>
+                                                        <!-- Property address input with lookup -->
+
+                                                       
+
+                                                        
+                                                        
+
+                                                        <div class="form-group col-md-12"><label class="text-dark" for="inputEmail" style="font-weight: 600">Property address</label>
+                                                            <!-- Add an address lookup that uses the Google API -->
+                                                            <input class="form-control py-4 rounded" id="autocomplete" placeholder="Enter your address" type="text" name="address" required></div>
+                                                        </div>
+                                                                                                                   <button id="showNextStep" class="btn btn-primary btn-block" type="button">Next step <i class="fas fa-arrow-right"></i></button>
+                                                        
+                                                        
+                                                </div>
+
+                                                <div id="nextStep" class="formContainer cushycms rounded shadow bg-white" style="display: none;">
+                                                        <!-- Add two elements so that the customer can supply 2 possible dates they are free-->
+                                                        <h4>Please supply a couple of provisisional dates when you are free for the airtightness test</h4>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6"><label class="text-dark" for="inputDate">Provisional Date 1</label><input class="form-control py-4" id="inputDate" type="date" name="Date1" /></div>
+                                                            <div class="form-group col-md-6"><label class="text-dark" for="inputDate">Provisional Date 2</label><input class="form-control py-4" id="inputDate" type="date" name="Date2" /></div>
+                                                        </div>
+                                                        <div class="form-group"><label class="text-dark" for="inputMessage" style="font-weight: 600">Please add any notes here</label><textarea class="form-control py-3" id="inputMessage" type="text" name="Description" placeholder="Enter your message..." rows="4"></textarea></div>
+                                                        <div class="text-center"><button class="btn btn-primary btn-block text-white btn-user" type="submit">Get your free quote <i class="fas fa-arrow-right"></i></button></div>
+                                                        <!-- No payment taken until booking is confirmed -->
+                                                        <p class="text-center mt-4 text-small">No payment taken until booking is confirmed</p>
+                                                </div>
+
+                                                
+                                            </form> 
+                                        </div> 
+                                        
+                                        <!-- Pay for the form to be sent to my email address -->
+                                        <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+                                        <script>
+                                        window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+                                        formbutton("create", {action: "https://formspree.io/f/xjvzdena"})
+
+                                        // Submit form with API and then display success message
+                                        //Post form data to API on submit
+
+                                        const userEmail = document.querySelector('#inputEmail');
+                                        const userName = document.querySelector('#inputName');
+                                        const userNumber = document.querySelector('#inputNumber');
+
+
+
+                                        
+                                        const submitForm = document.querySelector('#addEnquiry')
+                                        submitForm.addEventListener('submit', e => {
+                                            e.preventDefault();
+                                            //Check the userEmail and userName are not empty
+                                            if(userEmail.value === '' || userName.value === '') {
+                                                //Show an error message
+                                                alert('Please enter your name and email address');
+                                                
+
+                                            }
+
+                                            const formData = new FormData(submitForm);
+                                            const formObject = {};
+                                            for (const [key, value] of formData.entries()) {
+                                                formObject[key] = value;
+                                            }
+                                            const json = JSON.stringify(formObject);
+                                            fetch('https://formspree.io/f/xjvzdena', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Accept': 'application/json',
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: json
+                                            }).then(response => {
+                                                console.log(response);
+                                                // Display success message
+                                                document.querySelector('#firstStep').style.display = 'none';
+                                                document.querySelector('#nextStep').style.display = 'none';
+                                                document.querySelector('#showingFirstStep').innerHTML = '<h3>Thank you for your enquiry. We will be in touch shortly.</h3>';
+                                            });
+
+                                        })
+
+                                        function showNextStep() {
+                                            //Validate the elements in the first step
+                                                
+
+                                            document.getElementById("firstStep").style.display = "none";
+                                            document.getElementById("nextStep").style.display = "block";
+                                            //document.querySelector('#showingFirstStep').style.display = "none";
+                                        }
+
+                                        function hideNextStep() {
+                                            document.getElementById("firstStep").style.display = "block";
+                                            document.getElementById("nextStep").style.display = "none";
+                                        }
+
+                                        document.getElementById("showNextStep").addEventListener("click", showNextStep);
+
+                                        //Add a function to use the Google Places API to autocomplete the address
+                                        var placeSearch, autocomplete;
+                                        var componentForm = {
+                                            street_number: 'short_name',
+                                            route: 'long_name',
+                                            locality: 'long_name',
+                                            administrative_area_level_1: 'short_name',
+                                            country: 'long_name',
+                                            postal_code: 'short_name'
+                                        };
+
+                                        function initAutocomplete() {
+                                            // Create the autocomplete object, restricting the search predictions to
+                                            // geographical location types.
+                                            autocomplete = new google.maps.places.Autocomplete(
+                                                document.getElementById('autocomplete'), {types: ['geocode']});
+
+                                            // Avoid paying for data that you don't need by restricting the set of
+                                            // place fields that are returned to just the address components.
+                                            autocomplete.setFields(['address_component']);
+
+                                            // When the user selects an address from the drop-down, populate the
+                                            // address fields in the form.
+                                            autocomplete.addListener('place_changed', fillInAddress);
+                                        }
+
+                                      
+
+                                        function fillInAddress() {
+                                            // Get the place details from the autocomplete object.
+                                            var place = autocomplete.getPlace();
+
+                                            for (var component in componentForm) {
+                                                document.getElementById(component).value = '';
+                                                document.getElementById(component).disabled = false;
+                                            }
+
+                                            // Get each component of the address from the place details
+                                            // and fill the corresponding field on the form.
+                                            for (var i = 0; i < place.address_components.length; i++) {
+                                                var addressType = place.address_components[i].types[0];
+                                                if (componentForm[addressType]) {
+                                                    var val = place.address_components[i][componentForm[addressType]];
+                                                    document.getElementById(addressType).value = val;
+                                                }
+                                            }
+                                        }
+
+                                        
+
+                                        // // Iniiate the Google Places API
+                                        // initAutocomplete();
+                                        // fillInAddress();
+
+
+
+
+
+                                        </script>
+
+
  
 
                              
